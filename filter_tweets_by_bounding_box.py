@@ -10,7 +10,7 @@ import sys
 import time
 
 DSN = "dbname=igo"
-TABLE = "twitter.brasil_geo_ref_tweets_segunda"
+TABLE = "twitter.brasil_geo_ref_tweets_all"
 
 # '''
 #     Bounding Box for Pisa and nearby cities from OSM

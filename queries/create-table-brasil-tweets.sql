@@ -4,6 +4,7 @@ select
   text,
   latitude,
   longitude,
+  st_setsrid(st_makepoint(longitude, latitude), 4326) as tweet_geom
   retweeted,
   id_tweet_str,
   created_at,

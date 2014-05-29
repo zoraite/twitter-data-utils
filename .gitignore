@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+*pyc
+keys.api
+*.csv
+rojo.isti.cnr.it
