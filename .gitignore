@@ -1,4 +1,4 @@
-
+*.api
 keys.api
 *.json
 *.gz
