@@ -28,8 +28,7 @@ class StdOutListener(StreamListener):
             self.close_file()
             self.create_file()
             self.write_data(data)
-
-        print data
+            
         return True
 
     def on_error(self, status):
