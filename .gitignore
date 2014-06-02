@@ -1,5 +1,3 @@
-*.api
-keys.api
 *.json
 *.gz
 .DS_Store
