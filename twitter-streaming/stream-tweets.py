@@ -8,7 +8,6 @@ import gzip
 
 
 class StdOutListener(StreamListener):
-
     """
     A listener handles tweets are the received from the stream.
     This is a basic listener that just prints received tweets to stdout.
@@ -28,7 +27,7 @@ class StdOutListener(StreamListener):
             self.close_file()
             self.create_file()
             self.write_data(data)
-            
+
         return True
 
     def on_error(self, status):
@@ -51,11 +50,13 @@ class StdOutListener(StreamListener):
         return today == self.today
 
     def format_file_name(self):
-        return self.prefix + "-" + str(self.today.year) + str(self.today.month) + str(self.today.day) + ".json.gz"
+        return self.prefix + "-" \
+               + str(self.today.year) \
+               + str('%02d' % self.today.month) \
+               + str('%02d' % self.today.day) + ".json.gz"
 
 
 if __name__ == '__main__':
-
     section = "API"
 
     config = ConfigParser.RawConfigParser()
@@ -72,4 +73,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(auth, l)
-    stream.filter(locations=[-73.817,  -33.733,  -28.850,   16.800 ] )
+    stream.filter(locations=[-73.817, -33.733, -28.850, 16.800])
