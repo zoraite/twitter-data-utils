@@ -5,6 +5,7 @@ import datetime
 import json
 import ConfigParser
 import gzip
+import sys
 
 
 class StdOutListener(StreamListener):
@@ -13,9 +14,9 @@ class StdOutListener(StreamListener):
     This is a basic listener that just prints received tweets to stdout.
     """
 
-    def __init__(self):
+    def __init__(self, prefix):
         super(StdOutListener, self).__init__()
-        self.prefix = "brasil-georef-tweets"
+        self.prefix = prefix
         self.today = None
         self.current_file = None
 
@@ -59,6 +60,8 @@ class StdOutListener(StreamListener):
 if __name__ == '__main__':
     section = "API"
 
+    prefix = sys.args[0]
+
     config = ConfigParser.RawConfigParser()
     config.read('keys.api')
 
@@ -68,7 +71,7 @@ if __name__ == '__main__':
     access_token = config.get(section, "access_token")
     access_token_secret = config.get(section, "access_token_secret")
 
-    l = StdOutListener()
+    l = StdOutListener(prefix)
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
