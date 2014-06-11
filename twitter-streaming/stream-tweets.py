@@ -60,7 +60,7 @@ class StdOutListener(StreamListener):
 if __name__ == '__main__':
     section = "API"
 
-    prefix = sys.arg[0]
+    prefix = sys.arg[1]
 
     config = ConfigParser.RawConfigParser()
     config.read('keys.api')
