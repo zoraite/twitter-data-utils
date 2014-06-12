@@ -1,6 +1,7 @@
 *.json
 *.gz
 .DS_Store
+*.log
 .idea
 *pyc
 *.csv

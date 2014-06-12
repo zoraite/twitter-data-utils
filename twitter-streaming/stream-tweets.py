@@ -6,6 +6,7 @@ import json
 import ConfigParser
 import gzip
 import sys
+import logging
 
 
 class StdOutListener(StreamListener):
@@ -19,6 +20,10 @@ class StdOutListener(StreamListener):
         self.prefix = prefix
         self.today = None
         self.current_file = None
+        self.logger = logging.getLogger(__name__)
+        self.init_logger(prefix)
+
+        self.logger.info(prefix)
 
     def on_data(self, data):
 
@@ -32,12 +37,13 @@ class StdOutListener(StreamListener):
         return True
 
     def on_error(self, status):
-        print status
+        self.logger.error(status)
 
     def create_file(self):
         self.today = datetime.date.today()
         file_name = self.format_file_name()
         self.current_file = gzip.open(file_name, "a")
+        self.logger.info("Create File " + str(file_name))
 
     def write_data(self, data):
         self.current_file.write(json.dumps(data) + "\n")
@@ -56,12 +62,29 @@ class StdOutListener(StreamListener):
                + str('%02d' % self.today.month) \
                + str('%02d' % self.today.day) + ".json.gz"
 
+    def init_logger(self, prefix):
+        # Logging set up
+
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        console = logging.StreamHandler()
+        console.setFormatter(formatter)
+        file_handler = logging.FileHandler(prefix + ".log")
+        file_handler.setFormatter(formatter)
+        self.logger.addHandler(console)
+        self.logger.addHandler(file_handler)
+        self.logger.setLevel(logging.DEBUG)
+
 
 if __name__ == '__main__':
     section = "API"
 
     prefix = sys.argv[1]
-    coordinates = sys.argv[2]
+    coordinates = sys.argv[2].split(",")
+
+    sw_lng = float(coordinates[0])
+    sw_lat = float(coordinates[1])
+    ne_lng = float(coordinates[2])
+    ne_lat = float(coordinates[3])
 
     config = ConfigParser.RawConfigParser()
     config.read('keys.api')
@@ -79,4 +102,4 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
     # coordinates order: longitude, latitude
     # SW -> NE
-    stream.filter(locations=[coordinates[0], coordinates[1], coordinates[2], coordinates[3]])
+    stream.filter(locations=[sw_lng, sw_lat, ne_lng, ne_lat])
