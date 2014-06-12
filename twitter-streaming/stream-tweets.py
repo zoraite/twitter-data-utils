@@ -61,6 +61,7 @@ if __name__ == '__main__':
     section = "API"
 
     prefix = sys.argv[1]
+    coordinates = sys.argv[2]
 
     config = ConfigParser.RawConfigParser()
     config.read('keys.api')
@@ -76,4 +77,6 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(auth, l)
-    stream.filter(locations=[-73.817, -33.733, -28.850, 16.800])
+    # coordinates order: longitude, latitude
+    # SW -> NE
+    stream.filter(locations=[coordinates[0], coordinates[1], coordinates[2], coordinates[3]])
