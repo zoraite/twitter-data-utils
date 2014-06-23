@@ -10,7 +10,7 @@ import sys
 import time
 
 DSN = "dbname=igo"
-TABLE = "twitter.brasil_geo_ref_tweets_all"
+# TABLE = "twitter.brasil_geo_ref_tweets_all"
 
 # '''
 #     Bounding Box for Pisa and nearby cities from OSM
@@ -196,7 +196,7 @@ def get_attributes(json_data):
 
 
 def insert_tweet(row, table):
-    print("Tweet: ({})".format(time.time()))
+    # print("Tweet: ({})".format(time.time()))
 
     conn = psycopg2.connect(DSN)
     curs = conn.cursor()
@@ -247,11 +247,18 @@ def filter_out(row):
     return False
 
 if __name__ == '__main__':
-    create_tweets_table(TABLE)
+
+    table = sys.argv[1]
+    print table
+
+    create_tweets_table(table)
     for row in iter(sys.stdin.readline, ''):
         json_data = json.loads(row)
+
+        if type(json_data) is unicode:
+            json_data = json.loads(json_data)
 
         if json_data["geo"] is not None:
             t = get_attributes(json_data)
             if filter_out(t):
-                insert_tweet(t, TABLE)
+                insert_tweet(t, table)
