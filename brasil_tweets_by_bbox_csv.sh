@@ -13,5 +13,6 @@ cat dia20.json | head -n 10 | python $EXEC -b $BBOX sample.csv
 
 # gzcat ~/brasil-georef-tweets/brasil-georef-tweets-201407*.json.gz | python $EXEC -b $BBOX $TABLE
 
-
+CURRENT=`ls twitter-streaming/world-cup-tweets-2014/ | awk '{print $1}'`
+echo CURRENT
 
