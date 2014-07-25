@@ -17,7 +17,7 @@ D="twitter-streaming/world-cup-tweets-2014/"
 CURRENT=`ls $D*.gz | awk '{print $1}'`
 for F in $CURRENT
 do
-	echo $D""$F
-	$GZCAT $D""$F | python $EXEC -m "w" -b $BBOX $D""$F".csv"
+	echo $F
+	$GZCAT $F | python $EXEC -m "w" -b $BBOX $F".csv"
 done
 
