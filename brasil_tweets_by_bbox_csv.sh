@@ -18,6 +18,6 @@ CURRENT=`ls $D*.gz | awk '{print $1}'`
 for F in $CURRENT
 do
 	echo $D""$F
-#	$GZCAT $D""$F | python $EXEC -m "w" -b $BBOX $D""$F".csv"
+	$GZCAT $D""$F | python $EXEC -m "w" -b $BBOX $D""$F".csv"
 done
 
