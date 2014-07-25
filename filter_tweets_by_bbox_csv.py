@@ -81,7 +81,7 @@ class FilterTweetsCSV:
     def get_attributes(self, tweet):
 
         # remove break lines
-        content = tweet["text"].replace('\n', ' ').replace('\r', ' ')
+        content = tweet["text"].replace('\n', ' ').replace('\r', ' ').replace('\t', ' ')
         coordinate_0 = tweet["geo"]["coordinates"][0]
         coordinate_1 = tweet["geo"]["coordinates"][1]
         # TODO: incluir geometria
