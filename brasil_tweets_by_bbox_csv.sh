@@ -14,10 +14,10 @@ D="twitter-streaming/world-cup-tweets-2014/"
 
 # gzcat ~/brasil-georef-tweets/brasil-georef-tweets-201407*.json.gz | python $EXEC -b $BBOX $TABLE
 
-CURRENT=`ls $D | awk '{print $1}'`
+CURRENT=`ls $D*.gz | awk '{print $1}'`
 for F in $CURRENT
 do
 	echo $D""$F
-	$GZCAT $D""$F | python $EXEC -m "w" -b $BBOX $D""$F".csv"
+#	$GZCAT $D""$F | python $EXEC -m "w" -b $BBOX $D""$F".csv"
 done
 
