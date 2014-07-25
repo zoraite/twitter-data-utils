@@ -140,6 +140,7 @@ class FilterTweetsCSV:
 
         user_name = tweet["user"]["name"]
         user_id = tweet["user"]["id"]
+        user_location = tweet["user"]["location"]
         user_id_str = tweet["user"]["id_str"]
         user_friend_count = tweet["user"]["friends_count"]
         user_created_at = tweet["user"]["created_at"]
@@ -174,6 +175,7 @@ class FilterTweetsCSV:
             user_name,
             user_id,
             user_id_str,
+            user_location,
             user_friend_count,
             user_created_at,
             user_screen_name
