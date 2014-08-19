@@ -47,7 +47,7 @@ class UnicodeWriter:
         aux = []
         for s in row:
             if isinstance(s, unicode):
-                aux.append(s.encode("utf-8"))
+                aux.append(s.encode("utf-8").replace('\n', ' ').replace('\t', ' ').replace('\r', ' '))
             else:
                 aux.append(s)
         self.writer.writerow(aux)
