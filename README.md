@@ -1,1 +1,4 @@
-Some utilities for working with twitter data
+twitter-data-utils
+=========================
+
+Some utilities for working with tweets.
